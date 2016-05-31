@@ -23,15 +23,47 @@ public class EnemeyTesting : MonoBehaviour {
         mytransform = transform;
         target = GameObject.FindGameObjectWithTag("Player").transform;
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-     //   if (Vector3.Distance(target.position, mytransform.position) < 5)
-      //  {
-      //      mytransform.rotation = Quaternion.Slerp(mytransform.rotation, Quaternion.LookRotation(target.position - mytransform.position), rotationSpeed * Time.deltaTime);
-      //      mytransform.position += mytransform.forward * moveSpeed * Time.deltaTime;
-      //  }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+
+            if (warrior.bashActive == true)
+            {
+                warrior.bash();
+
+            }
+
+            if (Distance() < 3)
+            {
+                //  click.moveSpeed = 0;
+                hp = hp - Mathf.Abs(ArmorValue - (warrior.basedamage + warrior.WeaponDamage));
+            }
+
+            if (hp <= 0)
+            {
+                playerLevel.exp = playerLevel.exp + 200;
+                // golddrop();
+                Destroy(this.gameObject);
+
+
+            }
+
+
+        }
+
+
+        Debug.Log(hp);
+
+
+        //   if (Vector3.Distance(target.position, mytransform.position) < 5)
+        //  {
+        //      mytransform.rotation = Quaternion.Slerp(mytransform.rotation, Quaternion.LookRotation(target.position - mytransform.position), rotationSpeed * Time.deltaTime);
+        //      mytransform.position += mytransform.forward * moveSpeed * Time.deltaTime;
+        //  }
 
     }
     private float Distance()
