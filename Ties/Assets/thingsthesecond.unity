@@ -85,6 +85,52 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 23800000, guid: f4661503834d97b4a87adbfd97d471b0, type: 2}
+--- !u!1 &122495472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 122495474}
+  - 114: {fileID: 122495473}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &122495473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 122495472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0ef29e73ee2f049b25c2aaa5121b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotsX: 0
+  slotsY: 0
+  skin: {fileID: 0}
+  inventory: []
+  slots: []
+  showInventory: 0
+  draggingItem: 0
+--- !u!4 &122495474
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 122495472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
 --- !u!1001 &298209885
 Prefab:
   m_ObjectHideFlags: 0
@@ -681,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927e67765afe4ca40bdfc1af3d5df5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inv: {fileID: 122495473}
   moveSpeed: 0
 --- !u!114 &1272449079
 MonoBehaviour:
@@ -729,12 +776,25 @@ MonoBehaviour:
   mag: 0
   HealthPoints: 0
   ManaPoints: 0
+  MaxHealth: 0
   basedamage: 0
   damageReduction: 0
   WeaponDamage: 0
+  weapon: 0
   StatsMenu: 0
   damageTaken: 0
   statpoints: 0
+  healthpots: 0
+  manapots: 0
+  maxhealthpots: 0
+  maxmanapots: 0
+  isActive: 0
+  manaSpent: 0
+  gold: 0
+  sharpenActive: 0
+  bashActive: 0
+  casted: 0
+  tempDam: 0
 --- !u!1 &1343045670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLevel: {fileID: 1272449080}
+  t: {fileID: 0}
   warrior: {fileID: 1272449081}
 --- !u!1001 &2058372573
 Prefab:

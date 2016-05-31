@@ -14,9 +14,9 @@ public class PatternState : MonoBehaviour
 
 
 
-    [HideInInspector] public Transform chaseTarget;
-    [HideInInspector] public EnemyState currentState;
-    [HideInInspector] public ChaseState chaseState;
+    [HideInInspector]  public Transform chaseTarget;
+    public EnemyState currentState;
+    [HideInInspector]  public ChaseState chaseState;
     [HideInInspector] public IdleState idleState;
     [HideInInspector] public AttackState attackState;
     [HideInInspector] public PatrolState patrolstate;
@@ -25,32 +25,33 @@ public class PatternState : MonoBehaviour
 
     public void Awake()
     {
-        
+
         chaseState = new ChaseState(this);
         idleState = new IdleState(this);
-       // patrolstate = new PatrolState(this);
+        // patrolstate = new PatrolState(this);
         attackState = new AttackState(this);
 
-        navMeshAgent = GetComponent<NavMeshAgent> ();
+        navMeshAgent = GetComponent<NavMeshAgent>();
 
     }
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
 
-        currentState = idleState;    
-        
-        
-        	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        currentState = idleState;
+
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         currentState.UpdateState();
-	}
+        // Debug.Log(currentState);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

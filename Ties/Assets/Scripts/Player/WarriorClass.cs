@@ -96,13 +96,7 @@ public class WarriorClass : MonoBehaviour
     }
     public void bash()
     {
-        MaxHealth = (vit * 5);
-        HealthPoints = MaxHealth - damageTaken;
-        if (HealthPoints > MaxHealth)
-        {
-            HealthPoints = MaxHealth;
-        }
-
+   
         ManaPoints = mag * 5;
         basedamage = str / 2;
 
@@ -140,7 +134,16 @@ public class WarriorClass : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
-
+        if (GUI.Button(new Rect(0, 475, 250, 50), "Bash"))
+        {
+            bashActive = true;
+            sharpenActive = false;
+        }
+        if (GUI.Button(new Rect(0, 175, 50, 50), "Sharpen"))
+        {
+            sharpenActive = true;
+            bashActive = false;
+        }
         if (StatsMenu)
         {
             //resume button
@@ -179,16 +182,7 @@ public class WarriorClass : MonoBehaviour
                     mag = mag + 1;
                 }
             }
-            if (GUI.Button(new Rect(0, 375, 250, 50), "Bash"))
-            {
-                bashActive = true;
-                sharpenActive = false;
-            }
-            if (GUI.Button(new Rect(0, 275, 50, 50), "Sharpen"))
-            {
-                sharpenActive = true;
-                bashActive = false;
-            }
+         
         }
     }
 

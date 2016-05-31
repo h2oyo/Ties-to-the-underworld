@@ -6,12 +6,12 @@ public class AttackState : EnemyState
     bool canAtk;
     float AtkTime;
     private readonly PatternState enemy;
-    
+
     public AttackState(PatternState patternStateEnemy)
     {
 
         enemy = patternStateEnemy;
-        
+
     }
 
 
@@ -67,22 +67,22 @@ public class AttackState : EnemyState
     {
         AtkTime += Time.deltaTime;
 
-        if(AtkTime > 1 )
+        if (AtkTime > 1)
         {
             canAtk = true;
         }
         else { canAtk = false; }
 
 
-
-        if (Vector3.Distance(enemy.navMeshAgent.destination, enemy.chaseTarget.position) < 1f && canAtk == true)
+        // distance between enemy and enemy target
+        if (Vector3.Distance(enemy.transform.position, enemy.chaseTarget.position) < 2f && canAtk == true)
         {
             canAtk = false;
             enemy.warrior.damageTaken += 1;
             AtkTime = 0;
         }
         else { enemy.warrior.damageTaken += 0; }
-       
+
     }
 
 }

@@ -25,7 +25,7 @@ public class ChaseState : EnemyState
     {
         Search();
         Chase();
-        
+
     }
 
     public void toPatrol()
@@ -57,16 +57,16 @@ public class ChaseState : EnemyState
     {
         enemy.chaseTarget = GameObject.FindWithTag("Player").transform;
         RaycastHit hit;
-                Vector3 enemyToTarget = (enemy.chaseTarget.position + enemy.offset) - enemy.eyes.transform.position;
+        Vector3 enemyToTarget = (enemy.chaseTarget.position + enemy.offset) - enemy.eyes.transform.position;
         if (Physics.Raycast(enemy.eyes.transform.position, enemyToTarget, out hit, enemy.sightRange) && hit.collider.CompareTag("Player"))
         {
             enemy.chaseTarget = hit.transform;
 
         }
-      //  else
-       // {
-       //     toIdle();
-       // }
+        //  else
+        // {
+        //     toIdle();
+        // }
 
     }
 
@@ -74,11 +74,11 @@ public class ChaseState : EnemyState
     {
         enemy.navMeshAgent.destination = enemy.chaseTarget.position;
         enemy.navMeshAgent.Resume();
-       if(Vector3.Distance(enemy.navMeshAgent.destination, enemy.chaseTarget.position) < 5)
+        if (Vector3.Distance(enemy.navMeshAgent.destination, enemy.chaseTarget.position) < 5)
         {
             toAttack();
         }
-       
+
     }
 
 
