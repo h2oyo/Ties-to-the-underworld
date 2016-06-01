@@ -16,7 +16,7 @@ public class ItemDatabase : MonoBehaviour {
     void Awake()
     {
         //ReadItemsFromDataBase();
-        //for(int i = 0; i < inventoryItemsDictionary.Count; i++)
+        //for (int i = 0; i < inventoryItemsDictionary.Count; i++)
         //{
         //    inventoryItems.Add(new BaseItem(inventoryItemsDictionary[i]));
         //}

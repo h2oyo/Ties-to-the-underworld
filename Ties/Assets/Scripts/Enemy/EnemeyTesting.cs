@@ -56,7 +56,7 @@ public class EnemeyTesting : MonoBehaviour {
         }
 
 
-        Debug.Log(hp);
+      //  Debug.Log(hp);
 
 
         //   if (Vector3.Distance(target.position, mytransform.position) < 5)

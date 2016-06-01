@@ -1175,7 +1175,13 @@ MonoBehaviour:
   manapots: 0
   maxhealthpots: 0
   maxmanapots: 0
+  isActive: 0
+  manaSpent: 0
   gold: 0
+  sharpenActive: 0
+  bashActive: 0
+  casted: 0
+  tempDam: 0
 --- !u!114 &1272449082
 MonoBehaviour:
   m_ObjectHideFlags: 0

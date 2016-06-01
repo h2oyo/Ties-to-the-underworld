@@ -31,66 +31,68 @@ public class CreateNewWeapon : MonoBehaviour {
       
         newWeapon = new BaseWeapon();
 
-        newWeapon.ItemName = "W" + Random.Range(1, 101);
-
-        newWeapon.ItemDescripton = "This is a new Weapon.";
-
-        newWeapon.ItemID = Random.Range(1, 100);
+       
      
         ChooseWeaponType();
         ChooseRarity();
-        if (newWeapon.Raritytype == BaseEquipment.RarityType.Common)
-        {
-            newWeapon.itemIcon = common;
-            newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
-            Instantiate(common, transform.position, Quaternion.identity);
-        }
-        else if (newWeapon.Raritytype == BaseEquipment.RarityType.Magic)
-        {
-            newWeapon.itemIcon = magic;
-            newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
 
-            ChooseStat();
-            Instantiate(magic, transform.position, Quaternion.identity);
-        }
-        else if (newWeapon.Raritytype == BaseEquipment.RarityType.Rare)
+        GameObject spawnedWeapon;
+
+        switch(newWeapon.Raritytype)
         {
-            newWeapon.itemIcon = rare;
-            newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
-            ChooseStat();
-            ChooseStat();
-            Instantiate(rare, transform.position, Quaternion.identity);
+            case BaseItem.RarityType.Common:
+                newWeapon.itemIcon = common;
+                newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
+                spawnedWeapon = Instantiate(common.gameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case BaseItem.RarityType.Magic:
+                newWeapon.itemIcon = common;
+                newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
+                spawnedWeapon = Instantiate(magic.gameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case BaseItem.RarityType.Rare:
+                newWeapon.itemIcon = rare;
+                newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
+                spawnedWeapon = Instantiate(rare.gameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            case BaseItem.RarityType.Legendary:
+                newWeapon.itemIcon = legdendary;
+                newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
+                spawnedWeapon = Instantiate(legdendary.gameObject, transform.position, Quaternion.identity) as GameObject;
+                break;
+            default:
+                Debug.LogError("This isn't supposed to happen. :(");
+                return;
+                break;
+
         }
-        else if (newWeapon.Raritytype == BaseEquipment.RarityType.Legendary)
-        {
-            newWeapon.itemIcon = legdendary;
-            newWeapon.ItemDescripton = itemDes[Random.Range(0, itemDes.Length)];
-            ChooseStat();
-            ChooseStat();
-            ChooseStat();
-            Instantiate(legdendary, transform.position, Quaternion.identity);
-        }
+
+        BaseWeapon spawnedWeaponData = spawnedWeapon.GetComponent<BaseWeapon>();
+        spawnedWeaponData.dex = 9001;
+        spawnedWeaponData.itemID = Random.Range(1, 100);
+        spawnedWeaponData.ItemName = "W" + Random.Range(1, 101);
+        spawnedWeaponData.ItemDescripton = "This is a new Weapon.";
     }
 
     void ChooseRarity()
     {
         int randomTemp = Random.Range(1, 101);
-        if (randomTemp < 60)
+        if (randomTemp < 102)
         {
             newWeapon.Raritytype = BaseEquipment.RarityType.Common;
         }
-        else if (randomTemp > 61 && randomTemp < 85)
-        {
-            newWeapon.Raritytype = BaseEquipment.RarityType.Magic;
-        }
-        else if (randomTemp > 86 && randomTemp < 95)
-        {
-            newWeapon.Raritytype = BaseEquipment.RarityType.Rare;
-        }
-        else if (randomTemp < 101)
-        {
-            newWeapon.Raritytype = BaseEquipment.RarityType.Legendary;
-        }
+        //else if (randomTemp > 61 && randomTemp < 85)
+        //{
+        //    newWeapon.Raritytype = BaseEquipment.RarityType.Magic;
+        //}
+        //else if (randomTemp > 86 && randomTemp < 95)
+        //{
+        //    newWeapon.Raritytype = BaseEquipment.RarityType.Rare;
+        //}
+        //else if (randomTemp > 102)
+        //{
+        //    newWeapon.Raritytype = BaseEquipment.RarityType.Legendary;
+        //}
 
     }
 
