@@ -4,10 +4,12 @@ using System.Collections;
 
 namespace BurgZerArcade.ItemSystem.Editor
 { 
-public class ISQualityDatabaseEditor : EditorWindow {
-        ISQualityData db;
+public partial class ISQualityDatabaseEditor : EditorWindow {
+        ISQualityData datab;
         ISQuality selectedItem;
         Texture2D selectedTexture;
+        int selectedIndex = -1;
+        Vector2 _scrollPos;
 
         const int SPRITE_BUTTON_SIZE = 92;
 
@@ -26,16 +28,16 @@ public class ISQualityDatabaseEditor : EditorWindow {
 
         void OnEnable()
         {
-            db = AssetDatabase.LoadAssetAtPath(DATABASE_PATH, typeof(ISQualityData)) as ISQualityData;
-            if (db == null)
+            datab = AssetDatabase.LoadAssetAtPath(DATABASE_PATH, typeof(ISQualityData)) as ISQualityData;
+            if (datab == null)
             {
                 if (!AssetDatabase.IsValidFolder("Assets/" +DATABASE_FOLDER_NAME))
                 {
                     AssetDatabase.CreateFolder("Assets", DATABASE_FOLDER_NAME);
                     
                 }
-                db = ScriptableObject.CreateInstance<ISQualityData>();
-                AssetDatabase.CreateAsset(db, DATABASE_PATH);
+                datab = ScriptableObject.CreateInstance<ISQualityData>();
+                AssetDatabase.CreateAsset(datab, DATABASE_PATH);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
@@ -44,19 +46,46 @@ public class ISQualityDatabaseEditor : EditorWindow {
 
         void OnGUI()
         {
-            AddQualityToDatabase();
+           ListView();
+           //AddQualityToDatabase();
         }
 
         void AddQualityToDatabase()
         {
             selectedItem.Name = EditorGUILayout.TextField("Name:", selectedItem.Name);
-            if(selectedItem.Icon)
-            
+            if (selectedItem.Icon)
+
                 selectedTexture = selectedItem.Icon.texture;
+            else
+                selectedTexture = null;
 
-                GUILayout.Button(selectedTexture, GUILayout.Width(SPRITE_BUTTON_SIZE), GUILayout.Height(SPRITE_BUTTON_SIZE));
-           
+               if( GUILayout.Button(selectedTexture, GUILayout.Width(SPRITE_BUTTON_SIZE), GUILayout.Height(SPRITE_BUTTON_SIZE)))
+            {
+                int controlerID = EditorGUIUtility.GetControlID(FocusType.Passive);
+                EditorGUIUtility.ShowObjectPicker<Sprite>(null, true, null, controlerID);
+            }
 
+            string commandName = Event.current.commandName;
+            if(commandName == "ObjectSelectorUpdated")
+            {
+                selectedItem.Icon = (Sprite)EditorGUIUtility.GetObjectPickerObject();
+                Repaint();
+            }
+           if( GUILayout.Button("Save"))
+            {
+                if (selectedItem == null)
+                    return;
+
+                if (selectedItem.Name == "")
+                    return;
+
+                datab.Add(selectedItem);
+        
+
+
+                selectedItem = new ISQuality();
+
+            }
         }
 	
 	}

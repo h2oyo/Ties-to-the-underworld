@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BurgZerArcade.ItemSystem
 {
-    //[System.Serializable]
+    [System.Serializable]
     public class ISQuality : ISSQuality
     {
         [SerializeField]
@@ -13,7 +13,7 @@ namespace BurgZerArcade.ItemSystem
 
       public  ISQuality()
         {
-            _name = "Commn";
+            _name = "";
             _icon = new Sprite();
 
         }
