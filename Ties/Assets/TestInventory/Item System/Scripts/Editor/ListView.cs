@@ -19,11 +19,11 @@ namespace BurgZerArcade.ItemSystem.Editor
         void DisplayQualities()
         {
 
-            for(int cnt= 0; cnt < datab.Count; cnt++)
+            for(int cnt= 0; cnt < qualityDatabase.Count; cnt++)
             {
-                GUILayout.BeginHorizontal();
-                if (datab.Get(cnt).Icon)
-                    selectedTexture = datab.Get(cnt).Icon.texture;
+                GUILayout.BeginHorizontal("Box");
+                if (qualityDatabase.Get(cnt).Icon)
+                    selectedTexture = qualityDatabase.Get(cnt).Icon.texture;
                 else
                     selectedTexture = null;
 
@@ -40,22 +40,23 @@ namespace BurgZerArcade.ItemSystem.Editor
                     if (selectedIndex != -1)
                     {
 
-                        datab.Get(selectedIndex).Icon = (Sprite)EditorGUIUtility.GetObjectPickerObject();
+                        qualityDatabase.Get(selectedIndex).Icon = (Sprite)EditorGUIUtility.GetObjectPickerObject();
                         selectedIndex = -1;
 
                      
                     }
                     Repaint();
                 }
+                GUILayout.BeginVertical();
 
-                datab.Get(cnt).Name = GUILayout.TextField(datab.Get(cnt).Name);
+                qualityDatabase.Get(cnt).Name = GUILayout.TextField(qualityDatabase.Get(cnt).Name);
 
-                if(GUILayout.Button("x"))
+                if(GUILayout.Button("x", GUILayout.Width(30)))
                 {
-                    if(EditorUtility.DisplayDialog("Delete Quality", "Are you sure that you want to delete" + datab.Get(cnt).Name + "from the database", "Delete", "Cancel"))
+                    if(EditorUtility.DisplayDialog("Delete Quality", "Are you sure that you want to delete" + qualityDatabase.Get(cnt).Name + "from the database", "Delete", "Cancel"))
 
                     {
-                        datab.Remove(cnt);
+                        qualityDatabase.Remove(cnt);
                     }
                     GUILayout.EndHorizontal();
                 }

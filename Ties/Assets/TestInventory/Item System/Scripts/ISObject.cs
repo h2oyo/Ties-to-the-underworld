@@ -2,6 +2,7 @@
 using System.Collections;
 namespace BurgZerArcade.ItemSystem
 {
+    [System.Serializable]
     public class ISObject : IISObject
     {
         [SerializeField]

@@ -11,16 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619f7a8dc9044b744b5a881c290db7e7, type: 3}
   m_Name: bzaQualityDatabase
   m_EditorClassIdentifier: 
-  db:
-  - _name: comssdfasdfsadasd
+  database:
+  - _name: 
     _icon: {fileID: 21300000, guid: 203d9dcb298c761468d9d62e6682f377, type: 3}
-  - _name: Common
-    _icon: {fileID: 21300000, guid: de24fcf8c8cfdb74299645381a7edb14, type: 3}
-  - _name: MAgic
-    _icon: {fileID: 21300000, guid: c0fb561a6b943b44a8f219163904243b, type: 3}
-  - _name: Rare
-    _icon: {fileID: 21300000, guid: 203d9dcb298c761468d9d62e6682f377, type: 3}
-  - _name: Legend
-    _icon: {fileID: 21300000, guid: 203d9dcb298c761468d9d62e6682f377, type: 3}
-  - _name: Epic
-    _icon: {fileID: 21300000, guid: 203d9dcb298c761468d9d62e6682f377, type: 3}
+  - _name: 
+    _icon: {fileID: 0}
+  - _name: 
+    _icon: {fileID: 0}

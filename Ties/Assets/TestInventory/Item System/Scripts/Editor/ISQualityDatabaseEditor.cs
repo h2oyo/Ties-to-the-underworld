@@ -5,19 +5,19 @@ using System.Collections;
 namespace BurgZerArcade.ItemSystem.Editor
 { 
 public partial class ISQualityDatabaseEditor : EditorWindow {
-        ISQualityData datab;
+        ISQualityData qualityDatabase;
         ISQuality selectedItem;
         Texture2D selectedTexture;
         int selectedIndex = -1;
         Vector2 _scrollPos;
 
-        const int SPRITE_BUTTON_SIZE = 92;
+        const int SPRITE_BUTTON_SIZE = 46;
 
         const string DATABASE_FILE_NAME = @"bzaQualityDatabase.asset";
-        const string DATABASE_FOLDER_NAME = @"Database";
-        const string DATABASE_PATH = @"Assets/"+ DATABASE_FOLDER_NAME +"/" + DATABASE_FILE_NAME;
+        const string DATABASE_PATH = @"Database";
+        const string DATABASE_FULL_PATH = @"Assets/"+ DATABASE_PATH +"/" + DATABASE_FILE_NAME;
 
-        [MenuItem("BZA/Database/Quality Editor %#i")]
+        [MenuItem("BZA/Database/Quality Editor %#w")]
         public static void Init()
         {
             ISQualityDatabaseEditor window = EditorWindow.GetWindow<ISQualityDatabaseEditor>();
@@ -28,65 +28,37 @@ public partial class ISQualityDatabaseEditor : EditorWindow {
 
         void OnEnable()
         {
-            datab = AssetDatabase.LoadAssetAtPath(DATABASE_PATH, typeof(ISQualityData)) as ISQualityData;
-            if (datab == null)
-            {
-                if (!AssetDatabase.IsValidFolder("Assets/" +DATABASE_FOLDER_NAME))
-                {
-                    AssetDatabase.CreateFolder("Assets", DATABASE_FOLDER_NAME);
-                    
-                }
-                datab = ScriptableObject.CreateInstance<ISQualityData>();
-                AssetDatabase.CreateAsset(datab, DATABASE_PATH);
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
-            }
-            selectedItem = new ISQuality();
+            qualityDatabase = ScriptableObject.CreateInstance<ISQualityData>();
+            qualityDatabase = qualityDatabase.GetDatabase<ISQualityData>(DATABASE_PATH, DATABASE_FILE_NAME);
         }
 
         void OnGUI()
         {
+            if (qualityDatabase == null)
+            {
+                Debug.LogWarning("qualityDatabase not loaded");
+                return;
+            }
            ListView();
-           //AddQualityToDatabase();
+
+            GUILayout.BeginHorizontal("Box", GUILayout.ExpandWidth(true));
+            BottomBar();
+            GUILayout.EndHorizontal();
+           
+            
+        }
+        void BottomBar()
+        {
+            GUILayout.Label("Qualities :" + qualityDatabase.Count);
+
+            if(GUILayout.Button("Add"))
+            {
+                qualityDatabase.Add(new ISQuality());
+            }
         }
 
-        void AddQualityToDatabase()
-        {
-            selectedItem.Name = EditorGUILayout.TextField("Name:", selectedItem.Name);
-            if (selectedItem.Icon)
-
-                selectedTexture = selectedItem.Icon.texture;
-            else
-                selectedTexture = null;
-
-               if( GUILayout.Button(selectedTexture, GUILayout.Width(SPRITE_BUTTON_SIZE), GUILayout.Height(SPRITE_BUTTON_SIZE)))
-            {
-                int controlerID = EditorGUIUtility.GetControlID(FocusType.Passive);
-                EditorGUIUtility.ShowObjectPicker<Sprite>(null, true, null, controlerID);
-            }
-
-            string commandName = Event.current.commandName;
-            if(commandName == "ObjectSelectorUpdated")
-            {
-                selectedItem.Icon = (Sprite)EditorGUIUtility.GetObjectPickerObject();
-                Repaint();
-            }
-           if( GUILayout.Button("Save"))
-            {
-                if (selectedItem == null)
-                    return;
-
-                if (selectedItem.Name == "")
-                    return;
-
-                datab.Add(selectedItem);
-        
-
-
-                selectedItem = new ISQuality();
-
-            }
+    
         }
 	
 	}
-}
+
