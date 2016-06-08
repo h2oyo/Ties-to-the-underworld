@@ -21,7 +21,7 @@ namespace BurgZerArcade.ItemSystem.Editor
 
             for(int cnt= 0; cnt < qualityDatabase.Count; cnt++)
             {
-                GUILayout.BeginHorizontal("Box");
+                GUILayout.BeginVertical("Box");
                 if (qualityDatabase.Get(cnt).Icon)
                     selectedTexture = qualityDatabase.Get(cnt).Icon.texture;
                 else

@@ -4,7 +4,7 @@ namespace BurgZerArcade.ItemSystem
 {
     public class IISObject : MonoBehaviour
     {
-        string Name { get; set; }
+       public string Name { get; set; }
         int Value { get; set; }
         Sprite Icon { get; set; }
 

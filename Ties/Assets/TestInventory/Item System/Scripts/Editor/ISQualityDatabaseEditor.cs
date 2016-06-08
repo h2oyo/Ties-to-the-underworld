@@ -15,7 +15,7 @@ public partial class ISQualityDatabaseEditor : EditorWindow {
 
         const string DATABASE_FILE_NAME = @"bzaQualityDatabase.asset";
         const string DATABASE_PATH = @"Database";
-        const string DATABASE_FULL_PATH = @"Assets/"+ DATABASE_PATH +"/" + DATABASE_FILE_NAME;
+       const string DATABASE_FULL_PATH = @"Assets/"+ DATABASE_PATH +"/" + DATABASE_FILE_NAME;
 
         [MenuItem("BZA/Database/Quality Editor %#w")]
         public static void Init()
@@ -28,8 +28,8 @@ public partial class ISQualityDatabaseEditor : EditorWindow {
 
         void OnEnable()
         {
-            qualityDatabase = ScriptableObject.CreateInstance<ISQualityData>();
-            qualityDatabase = qualityDatabase.GetDatabase<ISQualityData>(DATABASE_PATH, DATABASE_FILE_NAME);
+      if(qualityDatabase == null)
+            qualityDatabase = ISQualityData.GetDatabase<ISQualityData>(DATABASE_PATH, DATABASE_FILE_NAME);
         }
 
         void OnGUI()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System;
 
@@ -16,7 +17,7 @@ namespace BurgZerArcade.ItemSystem
         public ISWeapon ()
         {
             _equipmentSlot = new ISEquipmentSlot();
-            _prefab = new GameObject();
+
         }
         public ISWeapon(int durability, int maxDurability, ISEquipmentSlot equipmentSlot, GameObject prefab)
         {
@@ -92,6 +93,25 @@ namespace BurgZerArcade.ItemSystem
             _maxDurability--;
             if(_maxDurability > 0)
             _durability = _maxDurability;
+        }
+
+        public override void OnGUI()
+        {
+            base.OnGUI();
+            _minDamage = System.Convert.ToInt32(EditorGUILayout.TextField("Damage", _minDamage.ToString()));
+            _durability = System.Convert.ToInt32(EditorGUILayout.TextField("Durablity", _durability.ToString()));
+            _maxDurability = System.Convert.ToInt32(EditorGUILayout.TextField("Durablity", _maxDurability.ToString()));
+            DisplayEquipmentSlot();
+            DisplayPrefab();
+        }
+
+        public void DisplayEquipmentSlot()
+        {
+            GUILayout.Label("Equipment Slot");
+        }
+        public void DisplayPrefab()
+        {
+            GUILayout.Label("Prefab");
         }
     }
 }
