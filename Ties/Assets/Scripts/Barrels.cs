@@ -16,8 +16,6 @@ public class Barrels : MonoBehaviour
     int ArmorValue;
    public WarriorClass warrior;
     Transform weapons1;
-    CreateNewEquipment equipment;
-    CreateNewWeapon weapon;
 
    
     
@@ -30,7 +28,7 @@ public class Barrels : MonoBehaviour
         t = this.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         weapons1 = Resources.Load<Transform>("Coin");
-        equipment = t.GetComponent<CreateNewEquipment>();
+
       //  weapon = t.GetComponent<CreateNewWeapon>();
     }
 
@@ -44,7 +42,7 @@ public class Barrels : MonoBehaviour
 
         // print(BarHit);
         // print(hp);
-        weapon = t.GetComponent<CreateNewWeapon>();
+
 
     }
     private float Distance()
@@ -61,7 +59,7 @@ public class Barrels : MonoBehaviour
     }
    void drop()
     {
-        weapon.CreateWeapon();
+
     }
     void OnMouseDown()
     {

@@ -39,9 +39,23 @@ public class WarriorClass : MonoBehaviour
     public bool sharpenActive;
     public bool bashActive;
     public bool casted;
+    public bool casted1;
     public int tempDam;
 
-   
+
+    public bool SkillMenu;
+
+    public int skillpoints;
+    public int bashLevel;
+    public int sharpenLevel;
+    public bool OffenseMenu;
+    public bool DefenseMenu;
+    public int DefAuraLevel;
+    public bool DefAuraActive;
+    public int baseTempDam;
+    public int tempDef;
+
+
     // Use this for initialization
     void Start ()
     {
@@ -58,9 +72,21 @@ public class WarriorClass : MonoBehaviour
         gold = 50;
         //hard value for testing only, this should come from the weapon tables.
 
+        damageReduction = 1;
         casted = false;
+        casted1 = false;
         bashActive = false;
         tempDam = WeaponDamage;
+        DefAuraActive = false;
+        SkillMenu = false;
+        OffenseMenu = false;
+        DefenseMenu = false;
+        bashLevel = 0;
+        sharpenLevel = 0;
+        DefAuraLevel = 0;
+
+        tempDef = damageReduction;
+        manaSpent = 0;
 
     }
 	
@@ -97,10 +123,18 @@ public class WarriorClass : MonoBehaviour
      
         ManaPoints = (mag * 5) - manaSpent;
         basedamage = str / 2;
+        baseTempDam = basedamage;
         if (ManaPoints <= 0) { ManaPoints = 0; }
+        if (manaSpent <= 0) { manaSpent = 0; }
         //  Debug.Log(basedamage);
         sharpen();
-        if(Input.GetButtonUp("Toggle Character Window"))
+        defAura();
+        bash();
+        if (damageTaken < 0)
+        {
+            damageTaken = 0;
+        }
+        if (Input.GetButtonUp("Toggle Character Window"))
         {
             Messenger.Broadcast("ToggleCharacterWindow");
         }
@@ -118,21 +152,41 @@ public class WarriorClass : MonoBehaviour
         {
             temptime = 0;
             manaSpent += 5;
-            if (casted == false) { casted = true; WeaponDamage += 2; }
+            if (casted == false && sharpenLevel == 1) { casted = true; WeaponDamage += 2; }
+            if (casted == false && sharpenLevel == 2) { casted = true; WeaponDamage += 4; }
+            if (casted == false && sharpenLevel == 3) { casted = true; WeaponDamage += 8; }
         }
         if (temptime >= 5) { WeaponDamage = tempDam; casted = false; temptime = 0; }
 
     }
     public void bash()
     {
-   
-        ManaPoints = mag * 5;
-        basedamage = str / 2;
 
-        basedamage = basedamage * 2;
-        manaSpent += 3;
+        if (bashLevel == 1)
+        {
+            basedamage = basedamage * 2;
+            manaSpent = manaSpent + 3;
+        }
+        if (bashLevel == 2)
+        {
+            basedamage = basedamage * 3;
+            manaSpent = manaSpent + 3;
+        }
 
     }
+
+    public void defAura()
+    {
+        if (DefAuraActive == true)
+        {
+
+            if (casted1 == false) { casted1 = true; damageReduction = damageReduction + 2; ; }
+
+        }
+        else
+        { damageReduction = tempDef; }
+    }
+
     void OnGUI()
     {
         GUI.Button(new Rect(0, 455, 150, 50), "GOLD:" + gold);
@@ -162,16 +216,6 @@ public class WarriorClass : MonoBehaviour
                 StatsMenu = false;
                 Time.timeScale = 1;
             }
-        }
-        if (GUI.Button(new Rect(0, 475, 250, 50), "Bash"))
-        {
-            bashActive = true;
-            sharpenActive = false;
-        }
-        if (GUI.Button(new Rect(0, 175, 50, 50), "Sharpen"))
-        {
-            sharpenActive = true;
-            bashActive = false;
         }
         if (StatsMenu)
         {
@@ -211,8 +255,101 @@ public class WarriorClass : MonoBehaviour
                     mag = mag + 1;
                 }
             }
-         
+
         }
+        if (GUI.Button(new Rect(1000, 0, 40, 40), "Skills:" + skillpoints))
+        {
+            if (!SkillMenu)
+            {
+                SkillMenu = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                SkillMenu = false;
+                Time.timeScale = 1;
+            }
+        }
+        if (SkillMenu)
+        {
+            if (GUI.Button(new Rect(450, 200, 200, 50), "Offense:"))
+            {
+                if (!OffenseMenu)
+                { OffenseMenu = true; SkillMenu = false; }
+                else { OffenseMenu = false; }
+            }
+            if (GUI.Button(new Rect(450, 260, 200, 50), "Defense:"))
+            {
+                if (!DefenseMenu)
+                { DefenseMenu = true; SkillMenu = false; }
+                else { DefenseMenu = false; }
+            }
+        }
+
+        if (OffenseMenu)
+        {
+            SkillMenu = false;
+            if (GUI.Button(new Rect(450, 200, 200, 50), "Bash:" + bashLevel))
+            {
+                if (bashLevel >= 1)
+                {
+                    bashActive = true;
+                    sharpenActive = false;
+                }
+                if (skillpoints > 0)
+                {
+                    skillpoints = skillpoints - 1;
+                    bashLevel = bashLevel + 1;
+                }
+            }
+            if (GUI.Button(new Rect(450, 260, 200, 50), "Sharpen:" + sharpenLevel))
+            {
+                if (sharpenLevel >= 1)
+                {
+                    sharpenActive = true;
+                    bashActive = false;
+                }
+                if (skillpoints > 0)
+                {
+                    skillpoints = skillpoints - 1;
+                    sharpenLevel = sharpenLevel + 1;
+                }
+            }
+            if (GUI.Button(new Rect(450, 320, 200, 50), "Close"))
+            { OffenseMenu = false; }
+        }
+        if (DefenseMenu)
+        {
+            SkillMenu = false;
+            if (GUI.Button(new Rect(450, 200, 200, 50), "Defensive Aura:" + DefAuraLevel))
+            {
+                if (DefAuraLevel >= 1)
+                {
+                    DefAuraActive = true;
+                    bashActive = false;
+                    sharpenActive = false;
+                }
+                if (skillpoints > 0)
+                {
+                    skillpoints = skillpoints - 1;
+                    DefAuraLevel = DefAuraLevel + 1;
+                }
+            }
+            if (GUI.Button(new Rect(450, 320, 200, 50), "Close"))
+            { DefenseMenu = false; }
+        }
+
+        if (GUI.Button(new Rect(0, 475, 250, 50), "Bash"))
+        {
+            bashActive = true;
+            sharpenActive = false;
+        }
+        if (GUI.Button(new Rect(0, 175, 50, 50), "Sharpen"))
+        {
+            sharpenActive = true;
+            bashActive = false;
+        }
+    
     }
 
 

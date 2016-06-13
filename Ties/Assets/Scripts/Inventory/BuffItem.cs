@@ -15,8 +15,4 @@ public class BuffItem : Item {
         buffs = ht;
     }
 
-    public void AddBuff(BaseStatItem stat, int mod)
-    {
-        buffs.Add(stat.name, mod);
-    }
 }
