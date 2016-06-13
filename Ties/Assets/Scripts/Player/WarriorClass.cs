@@ -10,7 +10,12 @@ public class WarriorClass : MonoBehaviour
     public static List<Item> Inventory{
         get{ return _inventory; }
         }
-
+    private static Item _equipedWeapon;
+    public static Item EquipedWeapon
+    {
+        get { return _equipedWeapon; }
+        set { _equipedWeapon = value; }
+    }
 
     public int exp, level;
     public int str, dex, vit, mag;
@@ -35,6 +40,8 @@ public class WarriorClass : MonoBehaviour
     public bool bashActive;
     public bool casted;
     public int tempDam;
+
+   
     // Use this for initialization
     void Start ()
     {
@@ -49,7 +56,7 @@ public class WarriorClass : MonoBehaviour
         StatsMenu = false;
         healthpots = 5;
         gold = 50;
-        WeaponDamage = 6; //hard value for testing only, this should come from the weapon tables.
+        //hard value for testing only, this should come from the weapon tables.
 
         casted = false;
         bashActive = false;
@@ -60,8 +67,15 @@ public class WarriorClass : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (EquipedWeapon != null)
+        {
+            WeaponDamage = EquipedWeapon.MaxDamage;
+        }
+        else
+        {
+            WeaponDamage = 0;
+        }
 
- 
         if (Input.GetKeyUp(KeyCode.K))
         {
             if (!StatsMenu)
@@ -86,6 +100,14 @@ public class WarriorClass : MonoBehaviour
         if (ManaPoints <= 0) { ManaPoints = 0; }
         //  Debug.Log(basedamage);
         sharpen();
+        if(Input.GetButtonUp("Toggle Character Window"))
+        {
+            Messenger.Broadcast("ToggleCharacterWindow");
+        }
+        if (Input.GetButtonUp("ToggleInventory"))
+        {
+            Messenger.Broadcast("ToggleInventory");
+        }
 
     }
 

@@ -4,38 +4,24 @@ using System.Collections;
 public class Weapon : BuffItem
 {
 
-    private int _maxDamage;
-    private float _dmgVar;
     private float _maxRange;
     private DamageType _dmgType;
 
     public Weapon()
     {
-        _maxDamage = 0;
-        _dmgVar = 0;
+       
         _maxRange = 0;
         _dmgType = DamageType.Bludgeon;
     }
 
-    public Weapon(int nDmg, float dmgV, float nRange, DamageType dt)
+    public Weapon(float nRange, DamageType dt)
     {
-        _maxDamage = nDmg;
-        _dmgVar = dmgV;
+
         _maxRange = nRange;
         _dmgType = dt;
     }
 
-    public int MaxDamage
-    {
-       get { return _maxDamage; }
-       set { _maxDamage = value; }
-    }
-
-    public float DamageVariance
-    {
-        get { return _dmgVar; }
-        set { _dmgVar = value; }
-    }
+ 
     public float MaxRange
     {
         get { return _maxRange; }
@@ -48,7 +34,12 @@ public class Weapon : BuffItem
     }
 
 
-
+    public override string ToolTip()
+    {
+        return Name + "\n" +
+             "Value:" + Value + "\n" +
+             "Durability:" + CurDurablilty + "/" + MaxDurablilty + "\n" + MaxDamage * DamageVariance + "-" + MaxDamage;
+    }
 
     public enum DamageType
     {

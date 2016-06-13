@@ -5,7 +5,7 @@ public class WeaponPickUp : MonoBehaviour {
     private Transform t;
     private Transform player;
 
-    Inventory inv;
+   
  
     BaseWeapon Weapon;
     CreateNewWeapon id;
@@ -13,7 +13,7 @@ public class WeaponPickUp : MonoBehaviour {
     void Start () {
         t = this.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        inv = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+
       
         Weapon = t.GetComponent<BaseWeapon>();
         

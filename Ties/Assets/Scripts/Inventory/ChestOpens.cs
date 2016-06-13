@@ -78,7 +78,8 @@ public class ChestOpens : MonoBehaviour {
             myGUI.chest = this;
             _player = GameObject.FindGameObjectWithTag("Player");
             inUse = true;
-            //animation.Play("Open");
+          //  animation.Play("Open");
+          
 
             //yeild return new WaitForSeconds(ainmation["open"].length);
             if(!_used)
@@ -92,8 +93,8 @@ public class ChestOpens : MonoBehaviour {
 
     private void PopulateChest(int x) { 
         for (int cnt = 0; cnt < x; cnt++) { 
-            loot.Add(new Item());
-            loot[cnt].Name = "I:" + Random.Range(0, 100);
+            loot.Add(ItemGenenerator.CreateItem());
+
     }
         _used = true;
 

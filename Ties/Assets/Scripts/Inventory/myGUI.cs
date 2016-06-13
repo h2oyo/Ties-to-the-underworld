@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class myGUI : MonoBehaviour {
+
     public float lootWindowHeight = 90;
 
     public float buttonWidth = 40;
@@ -20,15 +21,27 @@ public class myGUI : MonoBehaviour {
     public static ChestOpens chest;
 
 
-    private bool _displayInventoryWindow = true;
+    private bool _displayInventoryWindow = false;
     private const int INVENTORY_WINDOW_ID = 1;
     private Rect _InventoryWindowRect = new Rect(10, 10, 170, 265);
     private int _inventoryRows = 6;
     private int _inventoryCols = 4;
 
+    private float _doubleClickTimer = 0;
+    private const float DOUBLE_CLICK_TIMER_THRESHHOLD = .5f;
+    private Item _selectedItem;
+
+
+
+    private bool _displayCharacterWindow = false;
+    private const int CHARACTER_WINDOW_ID = 2;
+    private Rect _characterWindowRect = new Rect(20, 20, 170, 265);
+    private int _characterPanel = 0;
+    private string[] _characterPanelNames = new string[] { "Equipment", "Attributes", "Skills" };
 
     public GUISkin mySkin;
 
+    private string _toolTip = "";
 
 
     // Use this for initialization
@@ -40,6 +53,7 @@ public class myGUI : MonoBehaviour {
     {
         Messenger.AddListener("DisplayLoot", DisplayLoot);
         Messenger.AddListener("ToggleInventory", ToggleInventoryWindow);
+        Messenger.AddListener("ToggleCharacterWindow", ToggleCharacterWindow);
         Messenger.AddListener("CloseChest", ClearWindow);
        
     }
@@ -48,6 +62,7 @@ public class myGUI : MonoBehaviour {
     {
         Messenger.RemoveListener("DisplayLoot", DisplayLoot);
         Messenger.RemoveListener("ToggleInventory", ToggleInventoryWindow);
+        Messenger.RemoveListener("ToggleCharacterWindow", ToggleCharacterWindow);
         Messenger.RemoveListener("CloseChest", ClearWindow);
 
     }
@@ -59,10 +74,14 @@ public class myGUI : MonoBehaviour {
     void OnGUI()
     {
         GUI.skin = mySkin;
-        if(_displayInventoryWindow)
-            _InventoryWindowRect = GUI.Window(INVENTORY_WINDOW_ID, _InventoryWindowRect, InventoryWindow,"Inventory");
+        if (_displayCharacterWindow)
+            _characterWindowRect = GUI.Window(CHARACTER_WINDOW_ID, _characterWindowRect, CharacterWindow, "Character");
+
+        if (_displayInventoryWindow)
+            _InventoryWindowRect = GUI.Window(INVENTORY_WINDOW_ID, _InventoryWindowRect, InventoryWindow, "Inventory");
         if (_displayLootWindow)
             _lootWindowRect = GUI.Window(LOOT_WINDOW_ID, new Rect(_offset, Screen.height - (_offset + lootWindowHeight), Screen.width - (_offset * 2), lootWindowHeight), LootWindow, "Loot Window", "box");
+        DisplayToolTip();
     }
    private void LootWindow(int id)
     {
@@ -85,12 +104,16 @@ public class myGUI : MonoBehaviour {
 
         for(int cnt=0; cnt < chest.loot.Count; cnt++)
         {
-           if (GUI.Button(new Rect(buttonWidth * cnt, 0, buttonWidth, buttonHeight), chest.loot[cnt].Name))
+           if (GUI.Button(new Rect(_offset * .5f +(buttonWidth * cnt), _offset, buttonWidth, buttonHeight), new GUIContent(chest.loot[cnt].Icon, chest.loot[cnt].ToolTip())))
             {
+                Debug.Log(chest.loot[cnt].ToolTip());
+                WarriorClass.Inventory.Add(chest.loot[cnt]);
                 chest.loot.RemoveAt(cnt);
             }
         }
         GUI.EndScrollView();
+
+        SetToolTip();
     }
 
     private void DisplayLoot()
@@ -120,18 +143,126 @@ public class myGUI : MonoBehaviour {
 
     public void InventoryWindow(int id)
     {
-        for(int y = 0; y < _inventoryRows; y++)
-        {
-            for(int x = 0; x < _inventoryCols; x++)
-            {
-                GUI.Button(new Rect(5 + (x * buttonWidth), 20 + (y * buttonHeight), buttonWidth, buttonHeight), (x+ y * _inventoryCols).ToString());
+        int cnt = 0;
+        for (int y = 0; y < _inventoryRows; y++) {
+            for (int x = 0; x < _inventoryCols; x++) {
+                if (cnt < WarriorClass.Inventory.Count){
+                    if (GUI.Button(new Rect(5 + (x * buttonWidth), 20 + (y * buttonHeight), buttonWidth, buttonHeight), new GUIContent(WarriorClass.Inventory[cnt].Icon, WarriorClass.Inventory[cnt].ToolTip()))){
+                        if (_doubleClickTimer != 0 && _selectedItem != null)
+                        {
+                            if (Time.time - _doubleClickTimer < DOUBLE_CLICK_TIMER_THRESHHOLD)
+                            {
+                                if (WarriorClass.EquipedWeapon == null)
+                                {
+                                    WarriorClass.EquipedWeapon = WarriorClass.Inventory[cnt];
+                                    WarriorClass.Inventory.RemoveAt(cnt);
+                                }
+                                else
+                                {
+                                    Item temp = WarriorClass.EquipedWeapon;
+                                    WarriorClass.EquipedWeapon = WarriorClass.Inventory[cnt];
+                                    WarriorClass.Inventory[cnt] = temp;
+                                }
+
+                        }
+                            else
+                            {
+                                Debug.Log("Reset the double click timer");
+                                _doubleClickTimer = Time.time;
+
+                            }
+
+                        }
+                        else
+                        {
+                            _doubleClickTimer = Time.time;
+                            _selectedItem = WarriorClass.Inventory[cnt];
+                      
+                        }
+                    }
+                }
+                else
+                {
+                    GUI.Button(new Rect(5 + (x * buttonWidth), 20 + (y * buttonHeight), buttonWidth, buttonHeight), (x + y * _inventoryCols).ToString(), "box");
+                }
+                cnt++;
             }
+            SetToolTip();
+            GUI.DragWindow();
         }
-        GUI.DragWindow();
     }
+
 
     public void ToggleInventoryWindow()
     {
         _displayInventoryWindow = !_displayInventoryWindow;
+    }
+
+    public void ToggleCharacterWindow()
+    {
+        _displayCharacterWindow = !_displayCharacterWindow;
+    }
+    public void CharacterWindow(int id)
+    {
+        _characterPanel = GUI.Toolbar(new Rect(5, 25, _characterWindowRect.width - 10, 50), _characterPanel, _characterPanelNames);
+        switch (_characterPanel)
+        {
+            case 0:
+                DisplayEquipment();
+                break;
+            case 1:
+                DisplayAttribues();
+                break;
+            case 2:
+                DisplaySkills();
+                break;
+
+        }
+
+        GUI.DragWindow();
+    }
+
+    private void DisplayEquipment()
+    {
+
+        // Debug.Log("Displaying Equipment");
+        if(WarriorClass.EquipedWeapon == null)
+        {
+            GUI.Label(new Rect(5, 100, 40, 40), "", "box");
+        }
+       else {
+            if(GUI.Button(new Rect(5, 100, 40, 50), new GUIContent(WarriorClass.EquipedWeapon.Icon, WarriorClass.EquipedWeapon.ToolTip())))
+                {
+                WarriorClass.Inventory.Add(WarriorClass.EquipedWeapon);
+                WarriorClass.EquipedWeapon = null;
+            }
+        }
+        SetToolTip();
+    }
+    private void DisplayAttribues()
+    {
+       // Debug.Log("Displaying Attributes");
+    }
+    private void DisplaySkills()
+    {
+      //  Debug.Log("Displaying Skills");
+    }
+    private void SetToolTip()
+    {
+        if(Event.current.type == EventType.Repaint && GUI.tooltip != _toolTip)
+        {
+            if (_toolTip != "")
+                _toolTip = "";
+
+            if (GUI.tooltip != "")
+                _toolTip = GUI.tooltip;
+        }
+
+    }
+
+    private void DisplayToolTip()
+    {
+        if(_toolTip != "")
+            GUI.Box(new Rect(Screen.width / 2 - 100, 10, 200, 100), _toolTip);
     }
 }

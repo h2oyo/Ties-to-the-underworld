@@ -5,7 +5,7 @@ public class clicktomove : MonoBehaviour {
     private Vector3 destinationPosition;        // The destination Point
     private float destinationDistance;          // The distance between myTransform and destinationPosition
 
-    public Inventory inv;
+
 
 
     public float moveSpeed;
@@ -73,7 +73,7 @@ public class clicktomove : MonoBehaviour {
 
 
         // Moves the Player if the Left Mouse Button was clicked
-        if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0  && !inv.showInventory)
+        if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0)
         {
 
             Plane playerPlane = new Plane(Vector3.up, myTransform.position);
@@ -90,7 +90,7 @@ public class clicktomove : MonoBehaviour {
         }
 
         // Moves the player if the mouse button is held down
-        else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0 && !inv.showInventory)
+        else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
         {
 
             Plane playerPlane = new Plane(Vector3.up, myTransform.position);
