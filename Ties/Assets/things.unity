@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0ef29e73ee2f049b25c2aaa5121b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotsX: 5
-  slotsY: 4
-  skin: {fileID: 11400000, guid: c0a287662309e4f49b76a2cf9a3db5ed, type: 2}
+  slotsX: 0
+  slotsY: 0
+  skin: {fileID: 0}
   inventory: []
   slots: []
   showInventory: 0
@@ -331,6 +331,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1001 &545036992
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -8.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11100000, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &545036993 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100010, guid: 3287b2907b3c81a428d4dfe834c58fd2, type: 2}
+  m_PrefabInternal: {fileID: 545036992}
+--- !u!114 &545036994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 545036993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57877c9d77244044490e4bd5666c7145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  material: {fileID: 0}
+  parts: []
+  maxDistance: 2
+  inUse: 0
 --- !u!1 &564499760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,8 +1100,8 @@ GameObject:
   - 114: {fileID: 1272449080}
   - 114: {fileID: 1272449081}
   - 114: {fileID: 1272449082}
-  - 114: {fileID: 1272449083}
   - 114: {fileID: 1272449084}
+  - 114: {fileID: 1272449083}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1127,7 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecdd426f804d0e49a3e8c13159711ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warrior: {fileID: 0}
+  warrior: {fileID: 1272449081}
   pauseMenu: 0
 --- !u!114 &1272449080
 MonoBehaviour:
@@ -1201,10 +1279,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1272449072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa84d8e30815cff45bf86d75ca47b467, type: 3}
+  m_Script: {fileID: 11500000, guid: ce70e463a7a7bfe4c8424a7f75e7b401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 0
+  lootWindowHeight: 90
+  buttonWidth: 40
+  buttonHeight: 40
+  closeButtonWidth: 20
+  closeButtonHeight: 20
 --- !u!114 &1272449084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  itemInvetory: {fileID: 4900000, guid: 6dd97e2f6f58973409bc32d8378825fe, type: 3}
+  itemInvetory: {fileID: 0}
 --- !u!1 &1451246523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,9 +2096,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9178641a0ea6344bf452c647dbd1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevel: {fileID: 1272449080}
+  playerLevel: {fileID: 0}
   t: {fileID: 0}
-  warrior: {fileID: 1272449081}
+  warrior: {fileID: 0}
 --- !u!114 &1964906951
 MonoBehaviour:
   m_ObjectHideFlags: 0

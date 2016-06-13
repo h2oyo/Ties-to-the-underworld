@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Chest : MonoBehaviour {
 
@@ -40,5 +41,10 @@ public class Chest : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public static implicit operator Chest(GameObject v)
+    {
+        throw new NotImplementedException();
     }
 }

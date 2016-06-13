@@ -29,7 +29,7 @@ public class WeaponPickUp : MonoBehaviour {
     }
     void OnMouseDown()
     {
-        inv.AddItem(Weapon.itemID);
+      //  inv.AddItem(Weapon.itemID);
        // Destroy(this.gameObject);
 
     }

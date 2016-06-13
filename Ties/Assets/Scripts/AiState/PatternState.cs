@@ -49,7 +49,7 @@ public class PatternState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentState.UpdateState();
+      //  currentState.UpdateState();
         // Debug.Log(currentState);
     }
 

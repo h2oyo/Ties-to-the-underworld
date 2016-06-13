@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WarriorClass : MonoBehaviour
 {
+
+    private static List<Item> _inventory = new List<Item>();
+
+    public static List<Item> Inventory{
+        get{ return _inventory; }
+        }
 
 
     public int exp, level;
@@ -54,7 +61,7 @@ public class WarriorClass : MonoBehaviour
 	void Update ()
     {
 
-
+ 
         if (Input.GetKeyUp(KeyCode.K))
         {
             if (!StatsMenu)
