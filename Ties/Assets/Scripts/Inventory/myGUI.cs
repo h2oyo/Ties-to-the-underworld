@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class myGUI : MonoBehaviour {
 
+   // WarriorClass Warrior;
+
     public float lootWindowHeight = 90;
 
     public float buttonWidth = 40;
@@ -35,7 +37,7 @@ public class myGUI : MonoBehaviour {
 
     private bool _displayCharacterWindow = false;
     private const int CHARACTER_WINDOW_ID = 2;
-    private Rect _characterWindowRect = new Rect(20, 20, 170, 265);
+    private Rect _characterWindowRect = new Rect(20, 20, 250, 365);
     private int _characterPanel = 0;
     private string[] _characterPanelNames = new string[] { "Equipment", "Attributes", "Skills" };
 
@@ -204,7 +206,7 @@ public class myGUI : MonoBehaviour {
     }
     public void CharacterWindow(int id)
     {
-        _characterPanel = GUI.Toolbar(new Rect(5, 25, _characterWindowRect.width - 10, 50), _characterPanel, _characterPanelNames);
+        _characterPanel = GUI.Toolbar(new Rect(5, 25, _characterWindowRect.width + 10, 35), _characterPanel, _characterPanelNames);
         switch (_characterPanel)
         {
             case 0:
@@ -241,7 +243,42 @@ public class myGUI : MonoBehaviour {
     }
     private void DisplayAttribues()
     {
-       // Debug.Log("Displaying Attributes");
+        // Debug.Log("Displaying Attributes");
+        //if (GUI.Button(new Rect(450, 200, 200, 50), "Stregth:" + Warrior.str))
+        //{
+        //    if (Warrior.statpoints > 0)
+        //    {
+        //        Warrior.statpoints = Warrior.statpoints - 1;
+        //        Warrior.str = Warrior.str + 1;
+        //    }
+
+        //}
+        ////Exit to Menu button
+        //if (GUI.Button(new Rect(450, 260, 200, 50), "Dex:" + Warrior.dex))
+        //{
+        //    if (Warrior.statpoints > 0)
+        //    {
+        //        Warrior.statpoints = Warrior.statpoints - 1;
+        //        Warrior.dex = Warrior.dex + 1;
+        //    }
+        //}
+        ////Quit button
+        //if (GUI.Button(new Rect(450, 320, 200, 50), "Vit:" + Warrior.vit))
+        //{
+        //    if (Warrior.statpoints > 0)
+        //    {
+        //        Warrior.statpoints = Warrior.statpoints - 1;
+        //        Warrior.vit = Warrior.vit + 1;
+        //    }
+        //}
+        //if (GUI.Button(new Rect(450, 380, 200, 50), "Mag:" + Warrior.mag))
+        //{
+        //    if (Warrior.statpoints > 0)
+        //    {
+        //        Warrior.statpoints = Warrior.statpoints - 1;
+        //        Warrior.mag = Warrior.mag + 1;
+        //    }
+        //}
     }
     private void DisplaySkills()
     {

@@ -8,7 +8,7 @@ public class Item {
     private int _curDur;
     private int _maxDur;
     private Texture2D _icon;
-
+    private int _defence;
 
     private int _maxDamage;
     private float _dmgVar;
@@ -78,11 +78,17 @@ public string Name
           set { _icon = value; }
 
     }
+    public int Defence
+    {
+        get { return _defence; }
+        set { _defence = value; }
+    }
     public virtual string ToolTip()
     {
         return Name + "\n" +
             "Value:" + Value + "\n" +
-            "Durability:" + CurDurablilty + "/" + MaxDurablilty + "\n";
+            "Durability:" + CurDurablilty + "/" + MaxDurablilty + "\n"
+            + _defence + "\n";
     }
     public enum RarityTypes
     {

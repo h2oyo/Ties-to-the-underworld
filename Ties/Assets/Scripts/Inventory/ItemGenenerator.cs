@@ -5,10 +5,22 @@ public static class ItemGenenerator  {
     public const int BASE_MELEE_RANGE = 1;
 
     private const string MELEE_WEAPON_PATH = "Item Icons/Weapon/";
+    private const string MELEE_ARMOR_PATH = "Item Icons/Armor/";
     public static Item CreateItem()
     {
 
        Item item = CreateMeleeWeapon();
+        item.Value = Random.Range(1, 101);
+        item.Rarity = Item.RarityTypes.Common;
+        item.MaxDurablilty = Random.Range(50, 61);
+        item.CurDurablilty = item.MaxDurablilty;
+        return item;
+    }
+
+    public static Item CreateArmor()
+    {
+
+        Item item = CreateChest();
         item.Value = Random.Range(1, 101);
         item.Rarity = Item.RarityTypes.Common;
         item.MaxDurablilty = Random.Range(50, 61);
@@ -45,6 +57,42 @@ public static class ItemGenenerator  {
         Meleeweapon.Icon = Resources.Load(MELEE_WEAPON_PATH + Meleeweapon.Name) as Texture2D;
 
         return Meleeweapon;
+    }
+    private static Weapon CreatesChest()
+    {
+        Weapon Chest = CreateChest();
+
+
+
+
+        return Chest;
+    }
+    public static Weapon CreateChest()
+    {
+        Weapon Armor = new Weapon();
+        string[] ArmorNames = new string[3];
+
+        ArmorNames[0] = "Cloth";
+        ArmorNames[1] = "Chain";
+        ArmorNames[2] = "Metal";
+
+        Armor.Name = ArmorNames[Random.Range(0, ArmorNames.Length)];
+        if(Armor.Name == ArmorNames[0])
+        {
+            Armor.Defence = Random.Range(1, 3);
+        }
+        if (Armor.Name == ArmorNames[1])
+        {
+            Armor.Defence = Random.Range(3, 6);
+        }
+        if (Armor.Name == ArmorNames[2])
+        {
+            Armor.Defence = Random.Range(6, 9);
+        }
+
+        Armor.Icon = Resources.Load(MELEE_ARMOR_PATH + Armor.Name) as Texture2D;
+
+        return Armor;
     }
 
 }

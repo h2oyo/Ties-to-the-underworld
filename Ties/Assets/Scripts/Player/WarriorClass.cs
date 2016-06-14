@@ -16,7 +16,12 @@ public class WarriorClass : MonoBehaviour
         get { return _equipedWeapon; }
         set { _equipedWeapon = value; }
     }
-
+    private static Item _equipedChest;
+    public static Item EquipedChest
+    {
+        get { return _equipedChest; }
+        set { _equipedChest = value; }
+    }
     public int exp, level;
     public int str, dex, vit, mag;
     public int HealthPoints, ManaPoints, MaxHealth;
@@ -72,7 +77,7 @@ public class WarriorClass : MonoBehaviour
         gold = 50;
         //hard value for testing only, this should come from the weapon tables.
 
-        damageReduction = 1;
+        
         casted = false;
         casted1 = false;
         bashActive = false;
@@ -93,6 +98,14 @@ public class WarriorClass : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if(EquipedChest != null)
+        {
+            damageReduction = EquipedChest.Defence;
+        }
+        else
+        {
+            damageReduction = 0;
+        }
         if (EquipedWeapon != null)
         {
             WeaponDamage = EquipedWeapon.MaxDamage;
