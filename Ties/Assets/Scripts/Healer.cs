@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class Healer : MonoBehaviour
 {
     public bool healerMenu;

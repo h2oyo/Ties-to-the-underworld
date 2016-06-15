@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-public enum ItemType
+
+public class Item2 :Item
 {
-    Armors,
-    Weapon,
-    Potion,
-    Scroll
-}
-public class Item {
     private string _name;
     private int _value;
     private RarityTypes _rarity;
@@ -20,7 +15,7 @@ public class Item {
     private float _dmgVar;
 
     public ItemType Itemtypes;
-    public Item()
+    public Item2()
     {
         _name = "Need Name";
         _value = 0;
@@ -31,7 +26,7 @@ public class Item {
         _dmgVar = 0;
     }
 
-    public Item(string name, int value, RarityTypes rare, int maxDur, int curDur, int nDmg, float dmgV, int Def, ItemType type)
+    public Item2(string name, int value, RarityTypes rare, int maxDur, int curDur, int nDmg, float dmgV, int Def, ItemType type)
     {
         _name = name;
         _value = value;
@@ -44,11 +39,11 @@ public class Item {
         Itemtypes = type;
     }
 
-public string Name
-{
-    get { return _name; }
+    public string Name
+    {
+        get { return _name; }
         set { _name = value; }
-}
+    }
     public int Value
     {
         get { return _value; }
@@ -88,8 +83,8 @@ public string Name
     }
     public Texture2D Icon
     {
-            get { return _icon; }
-          set { _icon = value; }
+        get { return _icon; }
+        set { _icon = value; }
 
     }
     public int Defence

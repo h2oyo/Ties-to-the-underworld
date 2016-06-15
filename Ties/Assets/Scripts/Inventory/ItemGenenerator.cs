@@ -10,6 +10,7 @@ public static class ItemGenenerator  {
     {
 
        Item item = CreateMeleeWeapon();
+    
         item.Value = Random.Range(1, 101);
         item.Rarity = Item.RarityTypes.Common;
         item.MaxDurablilty = Random.Range(50, 61);
@@ -21,6 +22,7 @@ public static class ItemGenenerator  {
     {
 
         Item item = CreateChest();
+ 
         item.Value = Random.Range(1, 101);
         item.Rarity = Item.RarityTypes.Common;
         item.MaxDurablilty = Random.Range(50, 61);
@@ -58,18 +60,18 @@ public static class ItemGenenerator  {
 
         return Meleeweapon;
     }
-    private static Weapon CreatesChest()
+    private static Armor CreatesChest()
     {
-        Weapon Chest = CreateChest();
+        Armor Chest = CreateChest();
 
 
 
 
         return Chest;
     }
-    public static Weapon CreateChest()
+    public static Armor CreateChest()
     {
-        Weapon Armor = new Weapon();
+        Armor Armor = new Armor();
         string[] ArmorNames = new string[3];
 
         ArmorNames[0] = "Cloth";
@@ -91,15 +93,10 @@ public static class ItemGenenerator  {
         }
 
         Armor.Icon = Resources.Load(MELEE_ARMOR_PATH + Armor.Name) as Texture2D;
+        
 
         return Armor;
     }
 
 }
-public enum ItemType
-{
-    Armor,
-    Weapon,
-    Potion,
-    Scroll
-}
+

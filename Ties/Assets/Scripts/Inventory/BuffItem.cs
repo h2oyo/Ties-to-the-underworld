@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuffItem : Item {
+public class BuffItem : Item  {
 
     private Hashtable buffs;
 

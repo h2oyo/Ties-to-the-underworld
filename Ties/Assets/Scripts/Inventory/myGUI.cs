@@ -35,6 +35,7 @@ public class myGUI : MonoBehaviour {
 
 
 
+
     private bool _displayCharacterWindow = false;
     private const int CHARACTER_WINDOW_ID = 2;
     private Rect _characterWindowRect = new Rect(20, 20, 250, 365);
@@ -150,10 +151,43 @@ public class myGUI : MonoBehaviour {
             for (int x = 0; x < _inventoryCols; x++) {
                 if (cnt < WarriorClass.Inventory.Count){
                     if (GUI.Button(new Rect(5 + (x * buttonWidth), 20 + (y * buttonHeight), buttonWidth, buttonHeight), new GUIContent(WarriorClass.Inventory[cnt].Icon, WarriorClass.Inventory[cnt].ToolTip()))){
-                        if (_doubleClickTimer != 0 && _selectedItem != null)
+                        if (_doubleClickTimer != 0 && _selectedItem != null && _selectedItem.Itemtypes == ItemType.Armors)
                         {
-                            if (Time.time - _doubleClickTimer < DOUBLE_CLICK_TIMER_THRESHHOLD)
+                          
+                                if (Time.time - _doubleClickTimer < DOUBLE_CLICK_TIMER_THRESHHOLD)
                             {
+
+                                if (WarriorClass.EquipedChest == null)
+                                {
+                                    WarriorClass.EquipedChest = WarriorClass.Inventory[cnt];
+                                    WarriorClass.Inventory.RemoveAt(cnt);
+                                }
+                                else 
+                                {
+                                   
+                                    if (WarriorClass.EquipedChest.itemtype == ItemType.Armors)
+                                    {
+                                        Item temp = WarriorClass.EquipedChest;
+                                        WarriorClass.EquipedChest = WarriorClass.Inventory[cnt];
+
+                                        WarriorClass.Inventory[cnt] = temp;
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                _doubleClickTimer = Time.time;
+                               _selectedItem = WarriorClass.Inventory[cnt];
+
+                            }
+                        }
+                            if (_doubleClickTimer != 0 && _selectedItem != null && _selectedItem.Itemtypes == ItemType.Weapon)
+                        {
+                   
+                                if (Time.time - _doubleClickTimer < DOUBLE_CLICK_TIMER_THRESHHOLD)
+                            {
+
                                 if (WarriorClass.EquipedWeapon == null)
                                 {
                                     WarriorClass.EquipedWeapon = WarriorClass.Inventory[cnt];
@@ -161,12 +195,17 @@ public class myGUI : MonoBehaviour {
                                 }
                                 else
                                 {
-                                    Item temp = WarriorClass.EquipedWeapon;
-                                    WarriorClass.EquipedWeapon = WarriorClass.Inventory[cnt];
-                                    WarriorClass.Inventory[cnt] = temp;
+                                    
+                                    if (WarriorClass.EquipedWeapon.itemtype == ItemType.Weapon)
+                                    {
+                                            Item temp = WarriorClass.EquipedWeapon;
+                                            WarriorClass.EquipedWeapon = WarriorClass.Inventory[cnt];
+
+                                        WarriorClass.Inventory[cnt] = temp;
+                                    }
                                 }
 
-                        }
+                            }
                             else
                             {
                                 Debug.Log("Reset the double click timer");
@@ -178,14 +217,14 @@ public class myGUI : MonoBehaviour {
                         else
                         {
                             _doubleClickTimer = Time.time;
-                            _selectedItem = WarriorClass.Inventory[cnt];
+                           _selectedItem = WarriorClass.Inventory[cnt];
                       
                         }
                     }
                 }
                 else
                 {
-                    GUI.Button(new Rect(5 + (x * buttonWidth), 20 + (y * buttonHeight), buttonWidth, buttonHeight), (x + y * _inventoryCols).ToString(), "box");
+                   GUI.Button(new Rect(5 + (x * buttonWidth), 20 + (y * buttonHeight), buttonWidth, buttonHeight), (x + y * _inventoryCols).ToString(), "box");
                 }
                 cnt++;
             }
@@ -210,7 +249,8 @@ public class myGUI : MonoBehaviour {
         switch (_characterPanel)
         {
             case 0:
-                DisplayEquipment();
+                DisplayWeapon();
+                DisplayChest();
                 break;
             case 1:
                 DisplayAttribues();
@@ -224,22 +264,44 @@ public class myGUI : MonoBehaviour {
         GUI.DragWindow();
     }
 
-    private void DisplayEquipment()
+    private void DisplayWeapon()
     {
-
         // Debug.Log("Displaying Equipment");
-        if(WarriorClass.EquipedWeapon == null)
+        if (WarriorClass.EquipedWeapon == null)
         {
             GUI.Label(new Rect(5, 100, 40, 40), "", "box");
         }
        else {
-            if(GUI.Button(new Rect(5, 100, 40, 50), new GUIContent(WarriorClass.EquipedWeapon.Icon, WarriorClass.EquipedWeapon.ToolTip())))
+
+            if (_selectedItem.Itemtypes == ItemType.Weapon)
+                if (GUI.Button(new Rect(5, 100, 40, 50), new GUIContent(WarriorClass.EquipedWeapon.Icon, WarriorClass.EquipedWeapon.ToolTip())))
                 {
-                WarriorClass.Inventory.Add(WarriorClass.EquipedWeapon);
+                        WarriorClass.Inventory.Add(WarriorClass.EquipedWeapon);
                 WarriorClass.EquipedWeapon = null;
             }
         }
         SetToolTip();
+    }
+    private void DisplayChest()
+    {
+        
+        
+            if (WarriorClass.EquipedChest == null)
+            {
+                GUI.Label(new Rect(5, 150, 40, 40), "", "box");
+            }
+            else
+            {
+            if (_selectedItem.Itemtypes == ItemType.Armors)
+                if (GUI.Button(new Rect(5, 150, 40, 50), new GUIContent(WarriorClass.EquipedChest.Icon, WarriorClass.EquipedChest.ToolTip())))
+                {
+                  
+                        WarriorClass.Inventory.Add(WarriorClass.EquipedChest);
+                    WarriorClass.EquipedChest = null;
+                }
+            }
+            SetToolTip();
+        
     }
     private void DisplayAttribues()
     {

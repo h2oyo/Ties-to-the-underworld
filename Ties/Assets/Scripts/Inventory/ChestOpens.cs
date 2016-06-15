@@ -83,7 +83,7 @@ public class ChestOpens : MonoBehaviour {
 
             //yeild return new WaitForSeconds(ainmation["open"].length);
             if(!_used)
-            PopulateChest(2);
+            PopulateChest(5);
             state = ChestOpens.State.open;
             //Messenger<int, GameObject>.Broadcast("PopulateChest", 5, gameObject, MessengerMode.DONT_REQUIRE_LISTENER);
 
@@ -101,7 +101,7 @@ public class ChestOpens : MonoBehaviour {
             }
             if (roll < 5)
             {
-                loot.Add(ItemGenenerator.CreateChest());
+                loot.Add(ItemGenenerator.CreateArmor());
                 roll = Random.Range(0, 10);
             }
 

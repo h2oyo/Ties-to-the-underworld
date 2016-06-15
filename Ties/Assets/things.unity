@@ -101,7 +101,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!23 &351722448
 MeshRenderer:
@@ -226,7 +226,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!23 &508807449
 MeshRenderer:
@@ -363,7 +363,6 @@ MonoBehaviour:
   parts: []
   maxDistance: 2
   inUse: 0
-  loot: []
 --- !u!1 &564499760
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +379,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!23 &564499761
 MeshRenderer:
@@ -653,18 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d327c43ec4ed8d4196f63258657643e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemID: 0
-  itemIcon: {fileID: 0}
-  ITEMicon: {fileID: 0}
-  damage: 0
-  strength: 0
-  intellect: 0
-  vit: 0
-  dex: 0
-  itemType: 0
-  weaponType: 0
 --- !u!1001 &1098645394
 Prefab:
   m_ObjectHideFlags: 0
@@ -835,18 +822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d327c43ec4ed8d4196f63258657643e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemID: 0
-  itemIcon: {fileID: 0}
-  ITEMicon: {fileID: 0}
-  damage: 0
-  strength: 0
-  intellect: 0
-  vit: 0
-  dex: 0
-  itemType: 0
-  weaponType: 0
 --- !u!114 &1118154271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,18 +960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d327c43ec4ed8d4196f63258657643e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemID: 0
-  itemIcon: {fileID: 0}
-  ITEMicon: {fileID: 0}
-  damage: 0
-  strength: 0
-  intellect: 0
-  vit: 0
-  dex: 0
-  itemType: 0
-  weaponType: 0
 --- !u!1 &1272449072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1135,18 @@ MonoBehaviour:
   sharpenActive: 0
   bashActive: 0
   casted: 0
+  casted1: 0
   tempDam: 0
+  SkillMenu: 0
+  skillpoints: 0
+  bashLevel: 0
+  sharpenLevel: 0
+  OffenseMenu: 0
+  DefenseMenu: 0
+  DefAuraLevel: 0
+  DefAuraActive: 0
+  baseTempDam: 0
+  tempDef: 0
 --- !u!114 &1272449082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,8 +1321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7c1b84ee736a04c9f3e43de7f51354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
-  itemInvetory: {fileID: 0}
 --- !u!1 &1451246523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1337,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!23 &1451246524
 MeshRenderer:
@@ -1601,18 +1573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d327c43ec4ed8d4196f63258657643e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemID: 0
-  itemIcon: {fileID: 0}
-  ITEMicon: {fileID: 0}
-  damage: 0
-  strength: 0
-  intellect: 0
-  vit: 0
-  dex: 0
-  itemType: 0
-  weaponType: 0
 --- !u!114 &1707354355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1827,18 +1787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d327c43ec4ed8d4196f63258657643e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemID: 0
-  itemIcon: {fileID: 0}
-  ITEMicon: {fileID: 0}
-  damage: 0
-  strength: 0
-  intellect: 0
-  vit: 0
-  dex: 0
-  itemType: 0
-  weaponType: 0
 --- !u!114 &1851958601
 MonoBehaviour:
   m_ObjectHideFlags: 0
