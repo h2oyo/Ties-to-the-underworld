@@ -3,7 +3,7 @@ using System.Collections;
 public class Healer : MonoBehaviour
 {
     public bool healerMenu;
-    WarriorClass warrior;
+    public PlayerClass playerc;
     Transform player;
     // Use this for initialization
 
@@ -21,7 +21,7 @@ public class Healer : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        warrior = player.GetComponent<WarriorClass>();
+        playerc = player.GetComponent<PlayerClass>();
     }
 
     // Update is called once per frame
@@ -31,5 +31,26 @@ public class Healer : MonoBehaviour
 
 
 
+    }
+
+    void OnGUI()
+    {
+
+        if (healerMenu == true)
+        {
+            Time.timeScale = 0;
+            if (GUI.Button(new Rect(450, 200, 200, 50), "Heal Me!"))
+            { playerc.damageTaken = 0; }
+
+            if (GUI.Button(new Rect(450, 250, 200, 50), "Shop!"))
+            { }
+
+            if (GUI.Button(new Rect(450, 300, 200, 50), "Goodbye!"))
+            { healerMenu = false; }
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }

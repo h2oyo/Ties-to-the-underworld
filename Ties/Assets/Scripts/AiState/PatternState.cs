@@ -4,7 +4,7 @@ using System.Collections;
 public class PatternState : MonoBehaviour
 {
 
-    public WarriorClass warrior;
+    public PlayerClass player;
 
     public float sightRange = 20f;
     public Transform[] wayPoints;

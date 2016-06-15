@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Armor : Item2 {
+public class Armor : Item {
     public Armor ItemType { get; set; }
 
     public override string ToolTip()

@@ -69,7 +69,22 @@ public class clicktomove : MonoBehaviour {
             moveSpeed = 6;
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
 
+            Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float hitdist = 0.0f;
+
+            if (playerPlane.Raycast(ray, out hitdist))
+            {
+                Vector3 targetPoint = ray.GetPoint(hitdist);
+
+                Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+                myTransform.rotation = targetRotation;
+            }
+
+        }
 
 
         // Moves the Player if the Left Mouse Button was clicked

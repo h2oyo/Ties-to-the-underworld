@@ -6,11 +6,15 @@ public class LevelSystem : MonoBehaviour
     public int level;
     public int exp;
     public int statpoints;
-    public WarriorClass warrior;
+    public PlayerClass player;
     int expToLvL;
+
+    public bool lvlupCalled;
     void Start()
     {
+        level = 1;
         statpoints = 0;
+        lvlupCalled = false;
         expToLvL = 100;
     }
     // Update is called once per frame
@@ -23,11 +27,12 @@ public class LevelSystem : MonoBehaviour
         if (exp >= expToLvL)
         {
             level = level + 1;
-            warrior.statpoints = warrior.statpoints + 5;
-            warrior.skillpoints = warrior.skillpoints + 1;
+            player.statpoints = player.statpoints + 5;
+            player.skillpoints = player.skillpoints + 1;
             expToLvL = expToLvL * 2;
             exp = 0;
+            lvlupCalled = true;
         }
-
+        else lvlupCalled = false;
     }
 }

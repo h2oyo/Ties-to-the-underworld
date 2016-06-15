@@ -3,18 +3,18 @@ using System.Collections;
 public class EnemeyTesting : MonoBehaviour
 {
 
-    int moveSpeed = 3;
-    int rotationSpeed = 3;
+ 
+
     int ArmorValue;
-    int hp;
+   public int hp;
     Transform target; // target is the player on this script
     Transform mytransform;  // this is the enemy's transform
-    public WarriorClass warrior;
+    public PlayerClass player;
     public LevelSystem playerLevel;
     // Use this for initialization
     void Start()
     {
-        hp = 200;
+        hp = 75;
         ArmorValue = 1;
         mytransform = transform;
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -22,7 +22,27 @@ public class EnemeyTesting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hp);
+        HpAdjust();
+        if(hp <= 0)
+        {
+            playerLevel.exp = playerLevel.exp + 25;
+            Destroy(this.gameObject);
+        }
+      
+    }
+
+    void HpAdjust()
+    {
+        if(playerLevel.lvlupCalled == true)
+        {
+            if(playerLevel.level == 1) { hp = 75; }
+            if (playerLevel.level == 2) { hp = 110; }
+            if (playerLevel.level == 3) { hp = 150; }
+            if (playerLevel.level == 4) { hp = 200; }
+            if (playerLevel.level == 5) { hp = 240; }
+            if (playerLevel.level == 6) { hp = 300; }
+
+        }
     }
     private float Distance()
     {
@@ -30,19 +50,12 @@ public class EnemeyTesting : MonoBehaviour
     }
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1) && warrior.bashActive == true)
+        if (Input.GetMouseButtonDown(1) && player.bashActive == true)
         {
-            warrior.bash();
+            player.bash();
             if (Distance() < 3)
-            {
-                //  click.moveSpeed = 0;
-                hp = hp - Mathf.Abs(ArmorValue - (warrior.basedamage + warrior.WeaponDamage));
-            }
-            if (hp <= 0)
-            {
-                playerLevel.exp = playerLevel.exp + 200;
-                // golddrop();
-                Destroy(this.gameObject);
+            { 
+                hp = hp - Mathf.Abs(ArmorValue - (player.basedamage + player.WeaponDamage));
             }
         }
     }
@@ -50,14 +63,7 @@ public class EnemeyTesting : MonoBehaviour
     {
         if (Distance() < 3)
         {
-            //  click.moveSpeed = 0;
-            hp = hp - Mathf.Abs(ArmorValue - (warrior.basedamage + warrior.WeaponDamage));
-        }
-        if (hp <= 0)
-        {
-            playerLevel.exp = playerLevel.exp + 200;
-            // golddrop();
-            Destroy(this.gameObject);
+            hp = hp - Mathf.Abs(ArmorValue - (player.basedamage + player.WeaponDamage));
         }
     }
 }

@@ -89,9 +89,10 @@ public class WarriorClass : MonoBehaviour
         bashLevel = 0;
         sharpenLevel = 0;
         DefAuraLevel = 0;
-
+        damageReduction = 0;
         tempDef = damageReduction;
         manaSpent = 0;
+       
 
     }
 	
@@ -102,10 +103,7 @@ public class WarriorClass : MonoBehaviour
         {
             damageReduction = EquipedChest.Defence;
         }
-        else
-        {
-            damageReduction = 0;
-        }
+
         if (EquipedWeapon != null)
         {
             WeaponDamage = EquipedWeapon.MaxDamage;
@@ -197,7 +195,8 @@ public class WarriorClass : MonoBehaviour
 
         }
         else
-        { damageReduction = tempDef; }
+        { //damageReduction = tempDef;
+        }
     }
 
     void OnGUI()

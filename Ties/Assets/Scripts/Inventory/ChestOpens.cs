@@ -83,7 +83,7 @@ public class ChestOpens : MonoBehaviour {
 
             //yeild return new WaitForSeconds(ainmation["open"].length);
             if(!_used)
-            PopulateChest(5);
+            PopulateChest(1);
             state = ChestOpens.State.open;
             //Messenger<int, GameObject>.Broadcast("PopulateChest", 5, gameObject, MessengerMode.DONT_REQUIRE_LISTENER);
 

@@ -43,8 +43,4 @@ public class Chest : MonoBehaviour {
         }
     }
 
-    public static implicit operator Chest(GameObject v)
-    {
-        throw new NotImplementedException();
-    }
 }

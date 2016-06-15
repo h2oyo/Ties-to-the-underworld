@@ -34,7 +34,7 @@ public class Weapon : BuffItem
     }
 
 
-    public override string ToolTip()
+    public new string ToolTip()
     {
         return Name + "\n" +
              "Value:" + Value + "\n" +

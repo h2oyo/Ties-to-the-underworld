@@ -55,7 +55,7 @@ public static class ItemGenenerator  {
         Meleeweapon.DamageVariance = Random.Range(.2f, .76f);
         Meleeweapon.MaxRange = BASE_MELEE_RANGE;
         Meleeweapon.TypeOfDamage = Weapon.DamageType.Slash;
-
+        Meleeweapon.itemtype = ItemType.Weapon;
         Meleeweapon.Icon = Resources.Load(MELEE_WEAPON_PATH + Meleeweapon.Name) as Texture2D;
 
         return Meleeweapon;

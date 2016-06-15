@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Escmenu : MonoBehaviour
 {
-    public WarriorClass warrior;
+    public PlayerClass player;
     //menu option to on or off
     public bool pauseMenu = false;
 

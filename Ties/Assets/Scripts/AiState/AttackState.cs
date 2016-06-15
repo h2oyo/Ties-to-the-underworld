@@ -78,10 +78,10 @@ public class AttackState : EnemyState
         if (Vector3.Distance(enemy.transform.position, enemy.chaseTarget.position) < 2f && canAtk == true)
         {
             canAtk = false;
-            enemy.warrior.damageTaken += 1;
+            enemy.player.damageTaken += 1;
             AtkTime = 0;
         }
-        else { enemy.warrior.damageTaken += 0; }
+        else { enemy.player.damageTaken += 0; }
 
     }
 
